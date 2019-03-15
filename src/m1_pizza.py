@@ -30,10 +30,10 @@ def main():
     #        RE-commenting out the previous test to reduce the output.
     # -------------------------------------------------------------------------
 
-    run_test_generate_points_on_circle()
-    run_test_draw_points_on_circle()
-    run_test_pizza()
-    run_test_polygon()
+    #run_test_generate_points_on_circle()
+    #run_test_draw_points_on_circle()
+    #run_test_pizza()
+    #run_test_polygon()
     run_test_fancy_polygon()
 
 
@@ -581,7 +581,7 @@ def fancy_polygon(window, circle, number_of_lines, hops_to_next_point, color,
       :type thickness:       int
     """
     # -------------------------------------------------------------------------
-    # TODO: 10. Implement and test this function.
+    # DONE: 10. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
@@ -595,17 +595,15 @@ def fancy_polygon(window, circle, number_of_lines, hops_to_next_point, color,
     ###########################################################################
     # -------------------------------------------------------------------------
     pts = generate_points_on_circle(circle, number_of_lines)
+    for k in range(number_of_lines*hops_to_next_point):
+        pts.append(pts[k])
     circle.attach_to(window)
     for k in range(0,number_of_lines):
-        if k + hops_to_next_point <= len(pts) - 1:
-            line = rg.Line(pts[k], pts[k+hops_to_next_point+1])
-        if k + hops_to_next_point >= len(pts) - 1:
-            line = rg.Line(pts[k - len(pts)], pts[k + hops_to_next_point - len(pts)])
+        line = rg.Line(pts[k], pts[k+hops_to_next_point])
         line.color = color
-        line.thickness = thickness
         line.attach_to(window)
-    window.render()
-
+        line.thickness = thickness
+        window.render(.2)
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
